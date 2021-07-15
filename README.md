@@ -31,6 +31,35 @@ results/qc_and_trimming/cwl/
 └── ERR034597_2.small_fastqc.html
 ```
 
+#### for sapporo
+
+`workflow_url`
+
+`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/cwl/trimming_and_qc.cwl`
+
+---
+
+`workflow_engine`
+
+`cwltool`
+
+---
+
+`workflow_parameters`
+
+```json
+{
+  "fastq_1": {
+    "class": "File",
+    "location": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_1.small.fq.gz"
+  },
+  "fastq_2": {
+    "class": "File",
+    "location": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_2.small.fq.gz"
+  }
+}
+```
+
 ### nextflow
 
 ```bash
@@ -64,6 +93,65 @@ results/qc_and_trimming/nextflow/
     └── ERR034597_2.trimmed.2U.fq
 ```
 
+#### for sapporo
+
+`worfklow_url`
+
+`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/nextflow/main.nf`
+
+Nextflow は GitHub URL を書くと、github project として判断されるため、workflow_document を file として attach する必要がある
+
+---
+
+`workflow_engine`
+
+`nextflow`
+
+---
+
+`workflow_engine_parameters`
+
+```json
+{
+  "-c": "nextflow.config"
+}
+```
+
+---
+
+`workflow_attachment`
+
+Nextflow は `nextflow.config` を attach する必要がある。
+
+```json
+[
+  {
+    "file_name": "nextflow.config",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/nextflow/nextflow.config"
+  },
+  {
+    "file_name": "ERR034597_1.small.fq.gz",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_1.small.fq.gz"
+  },
+  {
+    "file_name": "ERR034597_2.small.fq.gz",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_2.small.fq.gz"
+  }
+]
+```
+
+---
+
+`workflow_parameters`
+
+```json
+{
+  "fastq_1": "./ERR034597_1.small.fq.gz",
+  "fastq_2": "./ERR034597_2.small.fq.gz",
+  "nthread": 2
+}
+```
+
 ### wdl
 
 ```bash
@@ -84,86 +172,57 @@ $ docker run -i --rm \
 $ tree cromwell-executions/
 cromwell-executions/
 └── qc_and_trimming
-    └── a1310703-93ab-43aa-a9a2-30e07d9df352
-        ├── call-qc_1
-        │   ├── execution
-        │   │   ├── docker_cid
-        │   │   ├── glob-bd086f3cf6886852715f2dd55c8bddbc
-        │   │   │   ├── cromwell_glob_control_file
-        │   │   │   ├── ERR034597_1.small_fastqc.html
-        │   │   │   └── ERR034597_1.small_fastqc.zip
-        │   │   ├── glob-bd086f3cf6886852715f2dd55c8bddbc.list
-        │   │   ├── qc_1
-        │   │   │   ├── ERR034597_1.small_fastqc.html
-        │   │   │   └── ERR034597_1.small_fastqc.zip
-        │   │   ├── rc
-        │   │   ├── script
-        │   │   ├── script.background
-        │   │   ├── script.submit
-        │   │   ├── stderr
-        │   │   ├── stderr.background
-        │   │   ├── stdout
-        │   │   └── stdout.background
-        │   ├── inputs
-        │   │   └── -2123581260
-        │   │       └── ERR034597_1.small.fq.gz
-        │   └── tmp.3a7553d6
-        ├── call-qc_2
-        │   ├── execution
-        │   │   ├── docker_cid
-        │   │   ├── glob-a7337e2991a5db0bf521e4e34f4b7560
-        │   │   │   ├── cromwell_glob_control_file
-        │   │   │   ├── ERR034597_2.small_fastqc.html
-        │   │   │   └── ERR034597_2.small_fastqc.zip
-        │   │   ├── glob-a7337e2991a5db0bf521e4e34f4b7560.list
-        │   │   ├── qc_2
-        │   │   │   ├── ERR034597_2.small_fastqc.html
-        │   │   │   └── ERR034597_2.small_fastqc.zip
-        │   │   ├── rc
-        │   │   ├── script
-        │   │   ├── script.background
-        │   │   ├── script.submit
-        │   │   ├── stderr
-        │   │   ├── stderr.background
-        │   │   ├── stdout
-        │   │   └── stdout.background
-        │   ├── inputs
-        │   │   └── -2123581260
-        │   │       └── ERR034597_2.small.fq.gz
-        │   └── tmp.64982b70
-        └── call-trimming
-            ├── execution
-            │   ├── docker_cid
-            │   ├── glob-aa81c8454c4316f7ee392b324287f3c4
-            │   │   ├── cromwell_glob_control_file
-            │   │   ├── ERR034597_1.small.trimmed.1P.fq
-            │   │   ├── ERR034597_1.small.trimmed.1U.fq
-            │   │   ├── ERR034597_1.small.trimmed.2P.fq
-            │   │   └── ERR034597_1.small.trimmed.2U.fq
-            │   ├── glob-aa81c8454c4316f7ee392b324287f3c4.list
-            │   ├── rc
-            │   ├── script
-            │   ├── script.background
-            │   ├── script.submit
-            │   ├── stderr
-            │   ├── stderr.background
-            │   ├── stdout
-            │   ├── stdout.background
-            │   └── trimming
-            │       ├── ERR034597_1.small.trimmed.1P.fq
-            │       ├── ERR034597_1.small.trimmed.1U.fq
-            │       ├── ERR034597_1.small.trimmed.2P.fq
-            │       └── ERR034597_1.small.trimmed.2U.fq
-            ├── inputs
-            │   └── -2123581260
-            │       ├── ERR034597_1.small.fq.gz
-            │       └── ERR034597_2.small.fq.gz
-            └── tmp.85fe88f5
+            ...
+```
+
+#### for sapporo
+
+`workflow_url`
+
+`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/wdl/qc_and_trimming.wdl`
+
+WDL は workflow document を file として attach しなければならない
+
+---
+
+`workflow_engine`
+
+`cromwell`
+
+---
+
+`workflow_attachment`
+
+WDL は remote file access が出来ないため、file attach する必要がある。
+
+```json
+[
+  {
+    "file_name": "ERR034597_1.small.fq.gz",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_1.small.fq.gz"
+  },
+  {
+    "file_name": "ERR034597_2.small.fq.gz",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_2.small.fq.gz"
+  }
+]
+```
+
+---
+
+`workflow_parameters`
+
+```json
+{
+  "qc_and_trimming.fastq_1": "ERR034597_1.small.fq.gz",
+  "qc_and_trimming.fastq_2": "ERR034597_2.small.fq.gz",
+  "qc_and_trimming.nthread": 2
+}
 ```
 
 ### snakemake
 
-```
+```bash
 $ cd qc_and_trimming/snakemake
 
 $ docker run -i --rm \

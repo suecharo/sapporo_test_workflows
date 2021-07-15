@@ -13,7 +13,8 @@ task qc_1 {
   }
 
   output {
-    Array[File] results = glob("qc_1/*")
+    File html = glob("qc_1/*.html")
+    File zip = glob("qc_1/*.zip")
   }
 
   runtime {
@@ -36,7 +37,8 @@ task qc_2 {
   }
 
   output {
-    Array[File] results = glob("qc_2/*")
+    File html = glob("qc_2/*.html")
+    File zip = glob("qc_2/*.zip")
   }
 
   runtime {
@@ -72,7 +74,10 @@ task trimming {
   }
 
   output {
-    Array[File] results = glob("trimming/*")
+    File output1 = glob("trimming/*.1P.fq")
+    File output2 = glob("trimming/*.1U.fq")
+    File output3 = glob("trimming/*.2P.fq")
+    File output4 = glob("trimming/*.2U.fq")
   }
 
   runtime {
