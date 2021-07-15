@@ -24,7 +24,7 @@ process qc_1 {
 
     """
     mkdir -p qc_1
-    /usr/local/bin/fastqc -o qc_1 \
+    fastqc -o qc_1 \
       --threads ${task.cpus} \
       ${input}
     """

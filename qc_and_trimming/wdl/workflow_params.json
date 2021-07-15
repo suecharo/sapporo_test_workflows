@@ -1,0 +1,5 @@
+{
+  "qc_and_trimming.fastq_1": "./qc_and_trimming/ERR034597_1.small.fq.gz",
+  "qc_and_trimming.fastq_2": "./qc_and_trimming/ERR034597_2.small.fq.gz",
+  "qc_and_trimming.nthread": 2
+}
