@@ -1,0 +1,73 @@
+rule all:
+    input:
+        # dynamic("qc_1/{prefix}_fastqc.zip"),
+        # dynamic("qc_1/{prefix}_fastqc.html"),
+        # dynamic("qc_2/{prefix}_fastqc.zip"),
+        # dynamic("qc_2/{prefix}_fastqc.html"),
+        "output_1.trimmed.1P.fq",
+        "output_1.trimmed.1U.fq",
+        "output_2.trimmed.2P.fq",
+        "output_2.trimmed.2U.fq"
+
+# rule qc_1:
+#     conda: "./envs.yml"
+#     threads: config["nthread"]
+#     input:
+#         fastq_1=config["fastq_1"]
+#     output:
+#         dynamic("qc_1/{prefix}_fastqc.zip"),
+#         dynamic("qc_1/{prefix}_fastqc.html")
+#     params: "--quiet"
+#     shell:
+#         """
+#         mkdir -p qc_1
+#         LC_ALL=C.UTF-8 LANG=C.UTF-8 fastqc -o qc_1 \
+#           --threads {threads} \
+#           {input.fastq_1}
+#         """
+
+# rule qc_2:
+#     conda: "./envs.yml"
+#     threads: config["nthread"]
+#     input:
+#         fastq_2=config["fastq_2"]
+#     output:
+#         dynamic("qc_2/{prefix}_fastqc.zip"),
+#         dynamic("qc_2/{prefix}_fastqc.html")
+#     params: "--quiet"
+#     shell:
+#         """
+#         mkdir -p qc_2
+#         LC_ALL=C.UTF-8 LANG=C.UTF-8 fastqc -o qc_2 \
+#           --threads {threads} \
+#           {input.fastq_2}
+#         """
+
+rule trimming:
+    conda: "./envs.yml"
+    threads: config["nthread"]
+    input:
+        fastq_1=config["fastq_1"],
+        fastq_2=config["fastq_2"]
+    output:
+        "output_1.trimmed.1P.fq",
+        "output_1.trimmed.1U.fq",
+        "output_2.trimmed.2P.fq",
+        "output_2.trimmed.2U.fq"
+    shell:
+        """
+        mkdir -p trimming
+        trimmomatic \
+        PE \
+        -threads {threads} \
+        {input.fastq_1} \
+        {input.fastq_2} \
+        output.trimmed.1P.fq \
+        output.trimmed.1U.fq \
+        output.trimmed.2P.fq \
+        output.trimmed.2U.fq \
+        LEADING:20 \
+        TRAILING:20 \
+        SLIDINGWINDOW:4:15 \
+        MINLEN:36
+        """

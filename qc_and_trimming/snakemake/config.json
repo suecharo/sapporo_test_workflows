@@ -1,0 +1,5 @@
+{
+  "fastq_1": "ERR034597_1.small.fq.gz",
+  "fastq_2": "ERR034597_2.small.fq.gz",
+  "nthread": 2
+}

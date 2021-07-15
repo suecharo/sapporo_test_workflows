@@ -3,3 +3,6 @@ work
 results
 metadata.json
 cromwell*
+.snakemake
+.empty
+output*

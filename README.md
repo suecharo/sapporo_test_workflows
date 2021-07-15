@@ -161,20 +161,26 @@ cromwell-executions/
             └── tmp.85fe88f5
 ```
 
-local container="broadinstitute/cromwell:55"
-local wf_type=$(jq -r ".workflow_type" ${run_request})
-  local wf_type_version=$(jq -r ".workflow_type_version" ${run_request})
-  local cmd_txt="docker run -i --rm ${D_SOCK} -v ${run_dir}:${run_dir} -v /tmp:/tmp -v /usr/bin/docker:/usr/bin/docker -w=${exe_dir} ${container} run ${wf_engine_params} ${wf_url} -i ${wf_params} -m ${exe_dir}/metadata.json --type ${wf_type} --type-version ${wf_type_version} 1>${stdout} 2>${stderr}"
-  echo ${cmd_txt} >${cmd}
-eval ${cmd_txt} || executor_error
-  if [[ ${wf_type} == "CWL" ]]; then
-    jq -r ".outputs[].location" "${exe_dir}/metadata.json" | while read output_file; do
-cp ${output_file} ${outputs_dir}/
-    done
-  elif [[ ${wf_type} == "WDL" ]]; then
-    jq -r ".outputs | to_entries[] | .value" "${exe_dir}/metadata.json" | while read output_file; do
-cp ${output_file} ${outputs_dir}/
-done
-fi
-
 ### snakemake
+
+```
+$ cd qc_and_trimming/snakemake
+
+$ docker run -i --rm \
+    -v $PWD:$PWD \
+    -w=$PWD \
+    snakemake/snakemake:v5.32.0 \
+    snakemake \
+    --use-conda \
+    --cores 2 \
+    --latency-wait 30 \
+    --snakefile ./Snakefile \
+    --configfile ./config.json
+
+$ tree trimming/
+trimming/
+├── output.trimmed.1P.fq
+├── output.trimmed.1U.fq
+├── output.trimmed.2P.fq
+└── output.trimmed.2U.fq
+```
