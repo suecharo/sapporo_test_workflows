@@ -5,6 +5,9 @@ task qc_1 {
     Int nthread
   }
 
+  String name = basename(sub(fastq, "\.gz$",""))
+  String reportDir = "qc_1/" + sub(name, "\.[^\.]*$", "_fastqc")
+
   command {
     mkdir -p qc_1
     fastqc -o qc_1 \
@@ -13,8 +16,8 @@ task qc_1 {
   }
 
   output {
-    File html = glob("qc_1/*.html")
-    File zip = glob("qc_1/*.zip")
+    File htmlReport = reportDir + ".html"
+    File reportZip = reportDir + ".zip"
   }
 
   runtime {
@@ -29,6 +32,9 @@ task qc_2 {
     Int nthread
   }
 
+  String name = basename(sub(fastq, "\.gz$",""))
+  String reportDir = "qc_2/" + sub(name, "\.[^\.]*$", "_fastqc")
+
   command {
     mkdir -p qc_2
     fastqc -o qc_2 \
@@ -37,8 +43,8 @@ task qc_2 {
   }
 
   output {
-    File html = glob("qc_2/*.html")
-    File zip = glob("qc_2/*.zip")
+    File htmlReport = reportDir + ".html"
+    File reportZip = reportDir + ".zip"
   }
 
   runtime {
@@ -52,8 +58,9 @@ task trimming {
     File fastq_1
     File fastq_2
     Int nthread
-    String sample_name = basename(fastq_1, ".fq.gz")
   }
+
+  String sample_name = basename(fastq_1, ".fq.gz")
 
   command {
     mkdir -p trimming
@@ -74,10 +81,10 @@ task trimming {
   }
 
   output {
-    File output1 = glob("trimming/*.1P.fq")
-    File output2 = glob("trimming/*.1U.fq")
-    File output3 = glob("trimming/*.2P.fq")
-    File output4 = glob("trimming/*.2U.fq")
+    File output1 = "trimming/" + sample_name + ".trimmed.1P.fq"
+    File output2 = "trimming/" + sample_name + ".trimmed.1U.fq"
+    File output3 = "trimming/" + sample_name + ".trimmed.2P.fq"
+    File output4 = "trimming/" + sample_name + ".trimmed.2U.fq"
   }
 
   runtime {
