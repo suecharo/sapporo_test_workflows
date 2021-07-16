@@ -6,6 +6,8 @@ Sapporo の test 用の workflow。
 
 ## qc_and_trimming
 
+![graph]("./qc_and_trimming/graph.png")
+
 ### cwl
 
 ```bash
