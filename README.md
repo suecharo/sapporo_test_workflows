@@ -275,7 +275,7 @@ snakemake は config file の扱いが難しい
 
 `workflow_attachment`
 
-`env.yml` や data set を atatch する
+`env.yml` や data set を attatch する
 
 ```json
 [
@@ -289,7 +289,7 @@ snakemake は config file の扱いが難しい
   },
   {
     "file_name": "envs.yml",
-    "file_url": "https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/snakemake/envs.yml"
+    "file_url": "https://raw.githubusercontent.com/suecharo/sapporo_test_workflows/main/qc_and_trimming/snakemake/envs.yml"
   }
 ]
 ```
