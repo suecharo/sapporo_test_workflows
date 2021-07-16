@@ -232,7 +232,6 @@ $ docker run -i --rm \
     snakemake \
     --use-conda \
     --cores 2 \
-    --latency-wait 30 \
     --snakefile ./Snakefile \
     --configfile ./config.json
 
