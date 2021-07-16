@@ -6,7 +6,7 @@ Sapporo の test 用の workflow。
 
 ## qc_and_trimming
 
-![graph]("./qc_and_trimming/graph.png")
+![graph](https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/graph.png)
 
 ### cwl
 
@@ -183,7 +183,7 @@ cromwell-executions/
 
 `https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/wdl/qc_and_trimming.wdl`
 
-WDL は workflow document を file として attach しなければならない
+WDL は workflow document を file として attach しなければならない ([追記] そんなこと無いみたい)
 
 ---
 
@@ -195,7 +195,7 @@ WDL は workflow document を file として attach しなければならない
 
 `workflow_attachment`
 
-WDL は remote file access が出来ないため、file attach する必要がある。
+WDL は remote file access が出来ないため、file attach する必要がある
 
 ```json
 [
