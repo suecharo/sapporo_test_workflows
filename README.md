@@ -37,7 +37,9 @@ results/qc_and_trimming/cwl/
 
 `workflow_url`
 
-`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/cwl/trimming_and_qc.cwl`
+```
+https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/cwl/trimming_and_qc.cwl
+```
 
 ---
 
@@ -99,7 +101,9 @@ results/qc_and_trimming/nextflow/
 
 `worfklow_url`
 
-`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/nextflow/main.nf`
+```
+https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/nextflow/main.nf
+```
 
 Nextflow は GitHub URL を書くと、github project として判断されるため、workflow_document を file として attach する必要がある
 
@@ -181,7 +185,9 @@ cromwell-executions/
 
 `workflow_url`
 
-`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/wdl/qc_and_trimming.wdl`
+```
+https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/wdl/qc_and_trimming.wdl
+```
 
 WDL は workflow document を file として attach しなければならない ([追記] そんなこと無いみたい)
 
@@ -249,7 +255,9 @@ trimming/
 
 `workflow_url`
 
-`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/snakemake/Snakefile`
+```
+https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/snakemake/Snakefile
+```
 
 Snakemake は workflow document を file として attach しなければならない
 
