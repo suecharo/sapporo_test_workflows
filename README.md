@@ -242,3 +242,66 @@ trimming/
 ├── output.trimmed.2P.fq
 └── output.trimmed.2U.fq
 ```
+
+#### for sapporo
+
+`workflow_url`
+
+`https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/snakemake/Snakefile`
+
+Snakemake は workflow document を file として attach しなければならない
+
+---
+
+`workflow_engine`
+
+`snakemake`
+
+---
+
+`workflow_engine_parameters`
+
+snakemake は config file の扱いが難しい
+
+```json
+{
+  "--use-conda": "",
+  "--cores": 2,
+  "--configfile": "workflow_params.json"
+}
+```
+
+---
+
+`workflow_attachment`
+
+`env.yml` や data set を atatch する
+
+```json
+[
+  {
+    "file_name": "ERR034597_1.small.fq.gz",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_1.small.fq.gz"
+  },
+  {
+    "file_name": "ERR034597_2.small.fq.gz",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/raw/main/qc_and_trimming/ERR034597_2.small.fq.gz"
+  },
+  {
+    "file_name": "envs.yml",
+    "file_url": "https://github.com/suecharo/sapporo_test_workflows/blob/main/qc_and_trimming/snakemake/envs.yml"
+  }
+]
+```
+
+---
+
+`workflow_parameters`
+
+```json
+{
+  "fastq_1": "ERR034597_1.small.fq.gz",
+  "fastq_2": "ERR034597_2.small.fq.gz",
+  "nthread": 2
+}
+```
